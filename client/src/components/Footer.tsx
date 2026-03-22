@@ -11,9 +11,7 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
           <div>
             <div className="flex items-center gap-2 mb-4">
-              <div className="w-8 h-8 rounded-full bg-gold flex items-center justify-center">
-                <Sun className="w-4 h-4 text-deep-blue" />
-              </div>
+              <img src="/logo-mahana-icon.png" alt="Mahana Tours" className="w-8 h-8 rounded-full object-cover" />
               <span className="text-xl font-bold text-white" style={{ fontFamily: "var(--font-display)" }}>
                 Mahana Tours
               </span>

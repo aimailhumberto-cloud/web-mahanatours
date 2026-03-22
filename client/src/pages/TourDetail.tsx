@@ -3,6 +3,8 @@ import { useParams, Link } from "wouter";
 import { motion } from "framer-motion";
 import { Clock, Users, MapPin, Star, Check, X, ArrowRight, ArrowLeft, Calendar, Shield, Sun, Phone, Bed } from "lucide-react";
 import Navbar from "@/components/Navbar";
+import Breadcrumbs from "@/components/Breadcrumbs";
+import StickyCTA from "@/components/StickyCTA";
 import Footer from "@/components/Footer";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import { ALL_TOURS, CATEGORIES, IMAGES, WHATSAPP_URL } from "@/lib/data";
@@ -60,6 +62,11 @@ export default function TourDetail() {
   return (
     <div className="min-h-screen bg-sand">
       <Navbar />
+      <Breadcrumbs crumbs={[
+        { label: "Tours", href: "/tours" },
+        { label: tour.name },
+      ]} />
+      <StickyCTA label={tour.name} price={tour.price} whatsappLink={tourWhatsApp} />
 
       {/* ═══════════════ HERO ═══════════════ */}
       <section className="relative h-[70vh] min-h-[500px] flex items-end overflow-hidden">

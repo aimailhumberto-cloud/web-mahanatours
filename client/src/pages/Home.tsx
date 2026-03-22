@@ -180,7 +180,7 @@ export default function Home() {
                   href={cat.id.startsWith("botes") ? "/botes" : `/tours?cat=${cat.id}`}
                   className="group block relative h-64 rounded-xl overflow-hidden tour-card"
                 >
-                  <img src={cat.image} alt={cat.name} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
+                  <img src={cat.image} alt={cat.name} loading="lazy" className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
                   <div className="absolute bottom-0 left-0 right-0 p-6">
                     <div className="flex items-center gap-2 mb-2">
@@ -219,7 +219,7 @@ export default function Home() {
               >
                 <Link href={`/tour/${tour.id}`} className="group block bg-white rounded-xl overflow-hidden border border-sand-dark tour-card">
                   <div className="relative h-48 overflow-hidden">
-                    <img src={tour.image} alt={tour.name} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
+                    <img src={tour.image} alt={tour.name} loading="lazy" className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
                     <div className="absolute top-3 left-3 px-3 py-1 bg-gold/90 text-deep-blue text-xs font-semibold rounded-full">
                       {CATEGORIES.find(c => c.id === tour.category)?.shortName}
                     </div>
@@ -258,7 +258,7 @@ export default function Home() {
       {/* ═══════════════ STAY AT CARACOL — DUAL CTA ═══════════════ */}
       <section className="relative py-24 overflow-hidden">
         <div className="absolute inset-0">
-          <img src={IMAGES.radissonPool} alt="Radisson Riviera pool" className="w-full h-full object-cover" />
+          <img src={IMAGES.radissonPool} alt="Radisson Riviera pool" loading="lazy" className="w-full h-full object-cover" />
           <div className="absolute inset-0 bg-deep-blue/75" />
         </div>
         <div className="container relative z-10">
@@ -296,9 +296,9 @@ export default function Home() {
             </motion.div>
             <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} custom={1}>
               <div className="grid grid-cols-2 gap-3">
-                <img src={IMAGES.radissonAerial} alt="Radisson Riviera aerial" className="rounded-xl h-40 w-full object-cover" />
-                <img src={IMAGES.radissonPool} alt="Radisson pool" className="rounded-xl h-40 w-full object-cover" />
-                <img src={IMAGES.ventoClub} alt="Vento Beach Club" className="rounded-xl h-40 w-full object-cover col-span-2" />
+                <img src={IMAGES.radissonAerial} alt="Radisson Riviera aerial" loading="lazy" className="rounded-xl h-40 w-full object-cover" />
+                <img src={IMAGES.radissonPool} alt="Radisson pool" loading="lazy" className="rounded-xl h-40 w-full object-cover" />
+                <img src={IMAGES.ventoClub} alt="Vento Beach Club" loading="lazy" className="rounded-xl h-40 w-full object-cover col-span-2" />
               </div>
             </motion.div>
           </div>

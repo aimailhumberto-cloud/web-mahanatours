@@ -35,9 +35,7 @@ export default function Navbar() {
       <div className="container flex items-center justify-between h-16 md:h-20">
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2 group">
-          <div className="w-9 h-9 rounded-full bg-gold flex items-center justify-center">
-            <Sun className="w-5 h-5 text-deep-blue" />
-          </div>
+          <img src="/logo-mahana-icon.png" alt="Mahana Tours" className="w-9 h-9 rounded-full object-cover" />
           <div className="flex flex-col leading-tight">
             <span
               className={`text-lg font-bold tracking-tight transition-colors ${

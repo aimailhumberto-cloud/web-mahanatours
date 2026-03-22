@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://web-mahanatours.onrender.com/sitemap.xml
