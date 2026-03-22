@@ -2,7 +2,7 @@
 import { useState, useMemo } from "react";
 import { Link, useSearch } from "wouter";
 import { motion } from "framer-motion";
-import { Clock, Users, MapPin, Search, Filter, ArrowRight, Star, Bed } from "lucide-react";
+import { Clock, Users, MapPin, Search, Filter, ArrowRight, Star, Bed, DollarSign } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import WhatsAppButton from "@/components/WhatsAppButton";
@@ -21,6 +21,8 @@ export default function Tours() {
   const [activeCat, setActiveCat] = useState(initialCat);
   const [searchQuery, setSearchQuery] = useState("");
   const [sortBy, setSortBy] = useState<"name" | "price-asc" | "price-desc">("name");
+  const [maxPrice, setMaxPrice] = useState(1000);
+  const [durationFilter, setDurationFilter] = useState<string>("all");
 
   // Filter out boat tours (they have their own page)
   const nonBoatCategories = CATEGORIES.filter(c => !c.id.startsWith("botes"));
@@ -33,10 +35,22 @@ export default function Tours() {
       const q = searchQuery.toLowerCase();
       tours = tours.filter((t) => t.name.toLowerCase().includes(q) || t.shortDescription.toLowerCase().includes(q));
     }
+    // Price filter
+    tours = tours.filter((t) => t.price <= maxPrice);
+    // Duration filter
+    if (durationFilter === "short") tours = tours.filter((t) => t.duration.includes("min") || t.duration === "1 hora");
+    else if (durationFilter === "half") tours = tours.filter((t) => {
+      const h = parseInt(t.duration);
+      return !t.duration.includes("min") && h >= 2 && h <= 4;
+    });
+    else if (durationFilter === "full") tours = tours.filter((t) => {
+      const h = parseInt(t.duration);
+      return !t.duration.includes("min") && (h >= 5 || t.duration.includes("día") || t.duration.includes("clases"));
+    });
     if (sortBy === "price-asc") tours = [...tours].sort((a, b) => a.price - b.price);
     else if (sortBy === "price-desc") tours = [...tours].sort((a, b) => b.price - a.price);
     return tours;
-  }, [activeCat, searchQuery, sortBy]);
+  }, [activeCat, searchQuery, sortBy, maxPrice, durationFilter]);
 
   return (
     <div className="min-h-screen bg-sand">
@@ -86,6 +100,30 @@ export default function Tours() {
                 <option value="price-asc">Precio: menor a mayor</option>
                 <option value="price-desc">Precio: mayor a menor</option>
               </select>
+              <select
+                value={durationFilter}
+                onChange={(e) => setDurationFilter(e.target.value)}
+                className="text-sm border border-sand-dark rounded-full px-4 py-2.5 bg-sand focus:outline-none focus:ring-2 focus:ring-gold/50"
+              >
+                <option value="all">Toda duración</option>
+                <option value="short">Corto (≤1h)</option>
+                <option value="half">Medio día (2-4h)</option>
+                <option value="full">Día completo (5h+)</option>
+              </select>
+            </div>
+            {/* Price slider */}
+            <div className="flex items-center gap-3 w-full md:w-auto">
+              <DollarSign className="w-4 h-4 text-muted-foreground shrink-0" />
+              <span className="text-xs text-muted-foreground whitespace-nowrap">Máx: ${maxPrice}</span>
+              <input
+                type="range"
+                min={20}
+                max={1000}
+                step={10}
+                value={maxPrice}
+                onChange={(e) => setMaxPrice(Number(e.target.value))}
+                className="flex-1 accent-amber-600 min-w-[120px]"
+              />
             </div>
           </div>
           {/* Category tabs */}

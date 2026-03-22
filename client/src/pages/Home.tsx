@@ -7,6 +7,7 @@ import { useState, useEffect } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import WhatsAppButton from "@/components/WhatsAppButton";
+import DestinationMap from "@/components/DestinationMap";
 import { IMAGES, CATEGORIES, ALL_TOURS, WHATSAPP_URL } from "@/lib/data";
 
 const fadeUp = {
@@ -351,6 +352,9 @@ export default function Home() {
         </div>
       </section>
 
+      {/* ═══════════════ DESTINATION MAP ═══════════════ */}
+      <DestinationMap />
+
       {/* ═══════════════ BOTES PREMIUM CTA ═══════════════ */}
       <section className="relative py-24 overflow-hidden">
         <div className="absolute inset-0">
@@ -397,9 +401,12 @@ export default function Home() {
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {[
-              { name: "Carlos M.", from: "Ciudad de Panamá", text: "El sunset cruise en el Sthamas fue increíble. BBQ en el yate viendo el atardecer del Pacífico. Ya reservé para el próximo mes.", rating: 5 },
-              { name: "Sarah K.", from: "California, USA", text: "The 7 waterfalls tour was the highlight of our Panama trip. Our guide knew every hidden spot. Absolutely unforgettable.", rating: 5 },
-              { name: "Ana L.", from: "Bogotá, Colombia", text: "Las clases de kitesurf en Punta Chame son de otro nivel. Vientos perfectos y el instructor fue muy paciente. Volveré por la certificación IKO.", rating: 5 },
+              { name: "Carlos M.", from: "Ciudad de Panamá", text: "El sunset cruise en el Sthamas fue increíble. BBQ en el yate viendo el atardecer del Pacífico. Ya reservé el próximo mes con más amigos.", rating: 5 },
+              { name: "Sarah K.", from: "California, USA", text: "The 7 waterfalls tour was the highlight of our Panama trip. Our guide knew every hidden spot. The rappel was amazing — we felt like explorers.", rating: 5 },
+              { name: "Ana L.", from: "Bogotá, Colombia", text: "Las clases de kitesurf en Punta Chame son de otro nivel. Vientos perfectos todo el día. Vuelvo en enero por la certificación IKO.", rating: 5 },
+              { name: "Roberto G.", from: "Ciudad de Panamá", text: "Hicimos el tour de islas con los niños. Agua cristalina, playas vacías y un capitán que nos cocinó el pescado que capturamos. Inolvidable.", rating: 5 },
+              { name: "María P.", from: "San José, Costa Rica", text: "El hiking al Cerro Chame al amanecer… no tengo palabras. Ver el Pacífico desde 560 metros con el sol saliendo es de otro mundo.", rating: 5 },
+              { name: "David T.", from: "Houston, TX", text: "My kids had surf lessons at ANS and loved it. The instructors were patient, fun and professional. We're coming back every winter break.", rating: 5 },
             ].map((review, i) => (
               <motion.div
                 key={i}
