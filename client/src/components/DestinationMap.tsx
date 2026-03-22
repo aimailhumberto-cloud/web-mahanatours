@@ -1,10 +1,9 @@
 /* Mahana Tours — Interactive Destination Map (Leaflet + OpenStreetMap) */
-import { useEffect, useRef, useState } from "react";
+import { useState, useEffect } from "react";
 import { MapContainer, TileLayer, Marker, Popup, useMap } from "react-leaflet";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
-import { MapPin, Clock, Users, ArrowRight } from "lucide-react";
-import { Link } from "wouter";
+import { MapPin } from "lucide-react";
 
 // Fix Leaflet default icon issue with bundlers
 delete (L.Icon.Default.prototype as any)._getIconUrl;
@@ -24,68 +23,56 @@ const goldIcon = new L.Icon({
   shadowSize: [41, 41],
 });
 
-// Destinations with coordinates and tour info
-export interface Destination {
+interface Destination {
   id: string;
   name: string;
   lat: number;
   lng: number;
   description: string;
   tourCount: number;
-  tourIds: string[];
-  icon: string;
 }
 
-export const DESTINATIONS: Destination[] = [
+// Real coordinates for Chame / Pacific Riviera area
+const DESTINATIONS: Destination[] = [
   {
     id: "playa-caracol",
     name: "Playa Caracol",
-    lat: 8.5617,
-    lng: -79.7023,
+    lat: 8.5658,
+    lng: -79.6845,
     description: "Base de operaciones Mahana. Surf, jet ski, tubing, beach buggies y más.",
     tourCount: 18,
-    tourIds: ["surf-101", "surf-foundation", "jet-ski-1h", "tubing-1h", "mulita-30"],
-    icon: "🏖️",
   },
   {
     id: "punta-chame",
     name: "Punta Chame",
-    lat: 8.5485,
-    lng: -79.7296,
+    lat: 8.5220,
+    lng: -79.7150,
     description: "Capital del kitesurf en el Pacífico. Vientos perfectos de Nov a Mar.",
     tourCount: 8,
-    tourIds: ["kite-surf-clase", "kite-surf-pack", "wing-foil"],
-    icon: "🪁",
   },
   {
     id: "islas-otoque-bona",
     name: "Islas Otoque y Boná",
-    lat: 8.4710,
-    lng: -79.5467,
+    lat: 8.4500,
+    lng: -79.5300,
     description: "Islas vírgenes del Pacífico. Snorkel, pesca artesanal y playas privadas.",
     tourCount: 3,
-    tourIds: ["isla-otoque-bona", "pesca-otoque-bona", "avistamiento-ballenas"],
-    icon: "🏝️",
   },
   {
     id: "isla-taborcillo",
     name: "Isla Taborcillo",
-    lat: 8.4898,
-    lng: -79.5752,
+    lat: 8.4700,
+    lng: -79.5550,
     description: "Isla privada con infraestructura. Day pass y manglares.",
     tourCount: 2,
-    tourIds: ["day-pass-taborcillo", "manglares-taborcillo"],
-    icon: "🌴",
   },
   {
     id: "cerro-chame",
     name: "Cerro Chame",
-    lat: 8.5750,
-    lng: -79.6800,
+    lat: 8.5500,
+    lng: -79.6700,
     description: "Hiking a 560m sobre el nivel del mar. Amanecer épico sobre el Pacífico.",
     tourCount: 1,
-    tourIds: ["hiking-cerro-chame"],
-    icon: "⛰️",
   },
   {
     id: "cascada-filipinas",
@@ -94,8 +81,6 @@ export const DESTINATIONS: Destination[] = [
     lng: -79.8100,
     description: "7 cascadas naturales en la selva panameña. Rappel y caminata.",
     tourCount: 2,
-    tourIds: ["tour-7-cascadas", "rappel-filipinas"],
-    icon: "🌊",
   },
   {
     id: "valle-anton",
@@ -104,26 +89,20 @@ export const DESTINATIONS: Destination[] = [
     lng: -80.1264,
     description: "Pueblo en un cráter volcánico. Cascadas, aguas termales y biodiversidad.",
     tourCount: 1,
-    tourIds: ["valle-de-anton"],
-    icon: "🌋",
   },
   {
     id: "radisson-riviera",
     name: "Radisson Riviera",
-    lat: 8.5605,
-    lng: -79.7005,
+    lat: 8.5645,
+    lng: -79.6865,
     description: "Hotel resort frente al mar. Piscina infinita, Vento Beach Club y spa.",
     tourCount: 0,
-    tourIds: [],
-    icon: "🏨",
   },
 ];
 
-// Center on Chame area
 const MAP_CENTER: [number, number] = [8.54, -79.68];
 const MAP_ZOOM = 11;
 
-// Fly to destination
 function FlyToDestination({ target }: { target: [number, number] | null }) {
   const map = useMap();
   useEffect(() => {
@@ -139,11 +118,6 @@ export default function DestinationMap() {
   const handleClick = (dest: Destination) => {
     setActive(dest.id);
     setFlyTarget([dest.lat, dest.lng]);
-  };
-
-  const resetView = () => {
-    setActive(null);
-    setFlyTarget(null);
   };
 
   return (
@@ -178,7 +152,7 @@ export default function DestinationMap() {
                 }`}
               >
                 <div className="flex items-start gap-3">
-                  <span className="text-2xl">{dest.icon}</span>
+                  <MapPin className={`w-4 h-4 mt-0.5 shrink-0 ${active === dest.id ? "text-gold" : "text-deep-blue"}`} />
                   <div className="flex-1 min-w-0">
                     <h4
                       className={`font-bold text-sm ${
@@ -236,7 +210,6 @@ export default function DestinationMap() {
                 >
                   <Popup>
                     <div className="min-w-[200px]">
-                      <p className="text-lg mb-1">{dest.icon}</p>
                       <h3 className="font-bold text-deep-blue text-sm">{dest.name}</h3>
                       <p className="text-xs text-gray-600 mt-1">{dest.description}</p>
                       {dest.tourCount > 0 && (
