@@ -37,24 +37,24 @@ const DESTINATIONS: Destination[] = [
   {
     id: "playa-caracol",
     name: "Playa Caracol",
-    lat: 8.6434,
-    lng: -79.7077,
+    lat: 8.5775,
+    lng: -79.7893,
     description: "Base de operaciones Mahana. Surf, jet ski, tubing, beach buggies y más.",
     tourCount: 18,
   },
   {
     id: "punta-chame",
     name: "Punta Chame",
-    lat: 8.5750,
-    lng: -79.7350,
+    lat: 8.5755,
+    lng: -79.7351,
     description: "Capital del kitesurf en el Pacífico. Vientos perfectos de Nov a Mar.",
     tourCount: 8,
   },
   {
     id: "islas-otoque-bona",
     name: "Islas Otoque y Boná",
-    lat: 8.6000,
-    lng: -79.6000,
+    lat: 8.6047,
+    lng: -79.6053,
     description: "Islas vírgenes del Pacífico. Snorkel, pesca artesanal y playas privadas.",
     tourCount: 3,
   },
@@ -69,8 +69,8 @@ const DESTINATIONS: Destination[] = [
   {
     id: "cerro-chame",
     name: "Cerro Chame",
-    lat: 8.6000,
-    lng: -79.8167,
+    lat: 8.5963,
+    lng: -79.8241,
     description: "Hiking a 560m sobre el nivel del mar. Amanecer épico sobre el Pacífico.",
     tourCount: 1,
   },
@@ -93,14 +93,14 @@ const DESTINATIONS: Destination[] = [
   {
     id: "radisson-riviera",
     name: "Radisson Riviera",
-    lat: 8.6430,
-    lng: -79.7070,
+    lat: 8.5743,
+    lng: -79.7930,
     description: "Hotel resort frente al mar. Piscina infinita, Vento Beach Club y spa.",
     tourCount: 0,
   },
 ];
 
-const MAP_CENTER: [number, number] = [8.62, -79.80];
+const MAP_CENTER: [number, number] = [8.60, -79.80];
 const MAP_ZOOM = 11;
 
 function FlyToDestination({ target }: { target: [number, number] | null }) {
